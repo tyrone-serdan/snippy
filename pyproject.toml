@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "snippy"
+version = "0.1.0"
+description = "A Textual-based snippet manager"
+requires-python = ">=3.11"
+dependencies = [
+    "textual>=8.0.0",
+    "pyperclip>=1.8",
+]
+
+[project.scripts]
+snippy = "snippy.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["snippy*"]
