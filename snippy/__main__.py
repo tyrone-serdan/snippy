@@ -78,23 +78,23 @@ class Snippy(App):
 		idx = event.list_view.children.index(event.item)
 		snippet = self.snippets[idx]
 
-		nameinput = self.query_one("#name-input", Input)
-		langinput = self.query_one("#lang-input", Input)
+		name_input = self.query_one("#name-input", Input)
+		lang_input = self.query_one("#lang-input", Input)
 		textarea = self.query_one("#content", TextArea)
 
-		nameinput.value = snippet["title"]
-		langinput.value = snippet["language"]
+		name_input.value = snippet["title"]
+		lang_input.value = snippet["language"]
 		textarea.text = snippet["content"]
 
-		longcheck = langinput.value in textarea.available_languages
+		long_check = lang_input.value in textarea.available_languages
 
-		shorthand = utils.language_from_shorthand(langinput.value)
-		shorthandcheck = shorthand in textarea.available_languages
+		shorthand = utils.language_from_shorthand(lang_input.value)
+		shorthand_check = shorthand in textarea.available_languages
 
-		if longcheck or shorthandcheck:
-			if longcheck:
-				textarea.language = langinput.value
-			elif shorthandcheck:
+		if long_check or shorthand_check:
+			if long_check:
+				textarea.language = lang_input.value
+			elif shorthand_check:
 				textarea.language = shorthand
 		else:
 			textarea.language = ""
@@ -117,26 +117,26 @@ class Snippy(App):
 		clipboard.copy(textarea)
 
 	def _create_snippet(self) -> None:
-		nameinput = self.query_one("#name-input", Input)
-		langinput = self.query_one("#lang-input", Input)
+		name_input = self.query_one("#name-input", Input)
+		lang_input = self.query_one("#lang-input", Input)
 		textarea = self.query_one("#content", TextArea)
 
-		nameinput.value = ""
-		langinput.value = ""
+		name_input.value = ""
+		lang_input.value = ""
 		textarea.text = ""
 
 	def _delete_snippet(self) -> None:
-		nameinput = self.query_one("#name-input", Input).value
+		name_input = self.query_one("#name-input", Input).value
 
-		storage.delete_snippet(nameinput)
+		storage.delete_snippet(name_input)
 		self._refresh_snippet_list()
 
 	def _save_snippet(self) -> None:
-		nameinput = self.query_one("#name-input", Input).value
-		langinput = self.query_one("#lang-input", Input).value
+		name_input = self.query_one("#name-input", Input).value
+		lang_input = self.query_one("#lang-input", Input).value
 		textarea = self.query_one("#content", TextArea).text
 
-		snippet = {"title": nameinput, "language": langinput, "content": textarea}
+		snippet = {"title": name_input, "language": lang_input, "content": textarea}
 
 		storage.save_snippet(snippet)
 		self._refresh_snippet_list()
