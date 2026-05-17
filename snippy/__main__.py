@@ -86,8 +86,16 @@ class Snippy(App):
 		langinput.value = snippet["language"]
 		textarea.text = snippet["content"]
 
-		if langinput.value in textarea.available_languages or utils.language_from_shorthand(langinput.value) in textarea.available_languages:
-			textarea.language = langinput.value
+		longcheck = langinput.value in textarea.available_languages
+
+		shorthand = utils.language_from_shorthand(langinput.value)
+		shorthandcheck = shorthand in textarea.available_languages
+
+		if longcheck or shorthandcheck:
+			if longcheck:
+				textarea.language = langinput.value
+			elif shorthandcheck:
+				textarea.language = shorthand
 		else:
 			textarea.language = ""
 
