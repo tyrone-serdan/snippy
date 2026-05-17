@@ -3,7 +3,7 @@ from textual.widgets import Header, ListView, ListItem, TextArea, Static, Button
 from textual.containers import Horizontal, Vertical
 from snippy.services import storage
 from snippy.services import clipboard
-
+from snippy.services import utils
 
 class Snippy(App):
 	CSS = """
@@ -67,7 +67,7 @@ class Snippy(App):
 				with Vertical(id="snippet-form"):
 					yield Input(placeholder="Snippet name...", id="name-input")
 					yield Input(placeholder="Language...", id="lang-input")
-			yield TextArea(id="content",)
+			yield TextArea(id="content", tab_behavior="indent")
 		with Horizontal(id="button-bar"):
 			yield Button("Copy", id="copy-btn")
 			yield Button("Create", id="create-btn")
@@ -85,6 +85,11 @@ class Snippy(App):
 		nameinput.value = snippet["title"]
 		langinput.value = snippet["language"]
 		textarea.text = snippet["content"]
+
+		if langinput.value in textarea.available_languages or utils.language_from_shorthand(langinput.value) in textarea.available_languages:
+			textarea.language = langinput.value
+		else:
+			textarea.language = ""
 
 	def on_button_pressed(self, event: Button.Pressed) -> None:
 		button = event.button.id
