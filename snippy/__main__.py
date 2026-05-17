@@ -67,7 +67,7 @@ class Snippy(App):
 				with Vertical(id="snippet-form"):
 					yield Input(placeholder="Snippet name...", id="name-input")
 					yield Input(placeholder="Language...", id="lang-input")
-			yield TextArea(id="content", tab_behavior="indent")
+			yield TextArea(id="content", tab_behavior="indent", show_line_numbers=True)
 		with Horizontal(id="button-bar"):
 			yield Button("Copy", id="copy-btn")
 			yield Button("Create", id="create-btn")
