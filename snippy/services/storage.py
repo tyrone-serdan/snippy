@@ -1,12 +1,12 @@
 from pathlib import Path
+from platformdirs import user_documents_dir
 import json
 
-SNIPPETS_DIR = Path("snippets")
+SNIPPETS_DIR = Path(user_documents_dir()) / "snippy-snippets"
 
 def load_snippets():
+	SNIPPETS_DIR.mkdir(parents=True, exist_ok=True)
 	snippets = []
-	if not SNIPPETS_DIR.exists():
-		return snippets
 
 	for file in SNIPPETS_DIR.glob("*.json"):
 		try:
@@ -21,7 +21,6 @@ def load_snippets():
 	return snippets
 
 def save_snippet(snippet: dict):
-	SNIPPETS_DIR.mkdir(parents=True, exist_ok=True)
 	title = snippet.get("title", "untitled")
 
 	filepath = SNIPPETS_DIR / f"{title}.json"
