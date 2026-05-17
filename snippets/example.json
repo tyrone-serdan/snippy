@@ -1,5 +1,0 @@
-{
-    "title": "example",
-    "language": "python",
-    "content": "def fibonacci(n):\n    a, b = 0, 1\n    for _ in range(n):\n        print(a, end=\" \")\n        a, b = b, a + b\n    print()\n\n\ndef main():\n    n = int(input(\"Enter a number: \"))\n    fibonacci(n)\n\n\nif __name__ == \"__main__\":\n    main()"
-}
