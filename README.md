@@ -17,9 +17,7 @@ A terminal-based code snippet manager built with [Textual](https://textual.textu
 snippy/
 ├── pyproject.toml
 ├── README.md
-├── snippets/                        # JSON snippet files
-│   ├── auth.json
-│   └── debounce.json
+├── snippets/                        # 
 └── snippy/                          # Package root
     ├── __init__.py
     ├── __main__.py                  # App entry point
